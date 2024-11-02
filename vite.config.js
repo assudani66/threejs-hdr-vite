@@ -6,11 +6,11 @@ export default defineConfig({
   plugins: [
     viteStaticCopy({
       targets: [
-        { src: 'public/*.hdr', dest: '' }  // Copies HDR files to the output directory
+        { src: 'public/hdr/*.hdr', dest: '' }
       ]
     })
   ],
   server: {
-    open: true,  // Automatically open in browser
+    open: true,
   }
 });
