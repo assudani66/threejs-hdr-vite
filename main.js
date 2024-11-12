@@ -9,7 +9,7 @@ const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerH
 camera.position.z = 5;
 
 // Set up the renderer
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({ antialias: true });;
 window.renderer = renderer
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
@@ -69,7 +69,7 @@ async function preloadTextures(textureNames) {
   );
 
   try {
-    await Promise.all(loadPromises);
+    await Promise.all(loadPromises); // Wait for all textures to load in parallel
   } catch (error) {
     console.error('Some textures failed to load:', error);
   }
