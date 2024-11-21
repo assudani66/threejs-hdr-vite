@@ -92,6 +92,7 @@ addLighting(scene)
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true; // Smooth the controls
 controls.dampingFactor = 0.05;
+controls.target.set(-25, 2, 9);
 
 async function getTextureNamesFromGLB() {
   const textureNames = new Set(); // Use a Set to avoid duplicates
