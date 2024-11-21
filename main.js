@@ -115,7 +115,7 @@ async function getTextureNamesFromGLB() {
 let envMap = null
 const rgbeLoader = new RGBELoader();
 rgbeLoader.load(
-  '/env.hdr', // Replace with your HDRI file path
+  '/small_cathedral_02_1k.hdr', // Replace with your HDRI file path
   (texture) => {
     texture.mapping = THREE.EquirectangularReflectionMapping;
 
