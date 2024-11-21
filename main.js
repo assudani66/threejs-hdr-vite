@@ -28,7 +28,10 @@ const contrastShader = {
   `
 };
 
-
+const fov = 60; // Field of View (realistic for human vision)
+const aspect = window.innerWidth / window.innerHeight; // Aspect ratio based on screen dimensions
+const near = 0.1; // Near clipping plane
+const far = 1000; // Far clipping plane
 
 function addLighting(scene) {
   // Ambient Light
@@ -60,7 +63,7 @@ function addLighting(scene) {
 
 // Set up the scene
 const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 1000);
 camera.position.x = -25;
 camera.position.y = 4.81339;
 camera.position.z = 11;
@@ -100,7 +103,7 @@ async function getTextureNamesFromGLB() {
   // Load the GLB file and retrieve texture names
   const gltfLoader = new GLTFLoader();
   await new Promise((resolve, reject) => {
-    gltfLoader.load('/tes-light-mapper4.glb', (gltf) => {
+    gltfLoader.load('/tes-light-mapper5.glb', (gltf) => {
       gltf.scene.traverse((child) => {
         if (child.isMesh && child.userData.atlasName) {
           textureNames.add(child.userData.atlasName);
@@ -177,7 +180,7 @@ async function loadModelWithTextures() {
 
   // Load the GLB file to apply textures
   const gltfLoader = new GLTFLoader();
-  gltfLoader.load('/tes-light-mapper4.glb', (gltf) => {
+  gltfLoader.load('/tes-light-mapper5.glb', (gltf) => {
     const model = gltf.scene;
     model.traverse((child) => {
       if (child.isMesh) {
@@ -188,8 +191,9 @@ async function loadModelWithTextures() {
         if (texture) {
           // If texture exists, apply it as a diffuse map
           console.log(`Applied texture: ${textureName}`); // Log texture application
-          child.material.map = texture;
+          // child.material.map = texture;
           child.material.lightMap = texture;
+          child.material.lightMapIntensity = 1.5;
           child.material.envMapIntensity = 0
 
         } else {
